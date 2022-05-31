@@ -10,11 +10,6 @@ git checkout class_23
 
 ```
 
-- Crear y activar entorno virtual (Windows)
-```bash
-C:\>python -m venv c:\ruta\al\entorno\virtual
-C:\>c:\ruta\al\entorno\virtual\scripts\activate.bat
-```
 
 - Crear y activar entorno virtual (Linux)
 ```bash
@@ -128,3 +123,10 @@ Sirve para cambiar la dirección url del repositorio que tenemos por origin.
 git remote set-url origin <url_de_tu_repositorio_en_GitHub>
 git remote set-url origin https://github.com/coder-live-class/django-coderhouse-project.git
 ```
+# Funcionalidades
+## Vendedores 
+- Listar vendedores: agrega nuevos vendedores [url](http://127.0.0.1:8000/app_coder/vendedores) 
+## Sucursales
+- Lista de sucursales: permite agregar nuevas sucursales [url] (http://127.0.0.1:8000/app_coder/sucursal)
+## Productos 
+- Lista de productos: permite agregar nuesvos productos [url] (http://127.0.0.1:8000/app_coder/productos)
