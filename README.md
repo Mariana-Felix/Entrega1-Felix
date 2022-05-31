@@ -127,6 +127,6 @@ git remote set-url origin https://github.com/coder-live-class/django-coderhouse-
 ## Vendedores 
 - Listar vendedores: agrega nuevos vendedores [url](http://127.0.0.1:8000/app_coder/vendedores) 
 ## Sucursales
-- Lista de sucursales: permite agregar nuevas sucursales [url] (http://127.0.0.1:8000/app_coder/sucursal)
+- Lista de sucursales: permite agregar nuevas sucursales [url](http://127.0.0.1:8000/app_coder/sucursal)
 ## Productos 
-- Lista de productos: permite agregar nuesvos productos [url] (http://127.0.0.1:8000/app_coder/productos)
+- Lista de productos: permite agregar nuesvos productos [url](http://127.0.0.1:8000/app_coder/productos)
