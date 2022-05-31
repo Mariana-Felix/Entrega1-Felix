@@ -1,0 +1,17 @@
+{% extends "app_coder/index.html" %}
+{% load static %}
+{% block app_coder_content %}
+
+<h2>Lista de Sucursales</h2>
+<a class="card_custom" href="{% url 'app_coder:SucursalDjangoForms' %}">Añadir nueva Sucursal</a>
+<hr></hr>
+<ul>
+    {% for s in sucursal %}
+        <li>
+            Nombre: {{s.name}}
+            -- Número: {{s.code}}
+        </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

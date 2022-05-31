@@ -55,9 +55,10 @@ ROOT_URLCONF = 'coderhouse_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['/Users/marianafelix/Documents/Python/Proyecto_Final/django-coderhouse-project/app_coder/templates/app_coder'],
+             
         'APP_DIRS': True,
-        'OPTIONS': {
+          'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',

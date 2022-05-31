@@ -3,85 +3,71 @@ from django.db.models import Q
 from django.forms.models import model_to_dict
 from django.contrib.auth.decorators import login_required
 
-from app_coder.models import Course, Student, Profesor, Homework
-from app_coder.forms import CourseForm, ProfesorForm, HomeworkForm
+from app_coder.models import Sucursal, Vendedor, Producto
+from app_coder.forms import SucursalForm, VendedorForm, ProductosForm
 
 
 def index(request):
     return render(request, "app_coder/home.html")
 
 
-def profesors(request):
-    profesors = Profesor.objects.all()
+def sucursal(request):
+    sucursal = Sucursal.objects.all()
 
     context_dict = {
-        'profesors': profesors
-    }
+        'sucursal': sucursal
+        }
 
     return render(
         request=request,
         context=context_dict,
-        template_name="app_coder/profesors.html"
+        template_name="app_coder/sucursal.html"
     )
 
 
-def courses(request):
-    courses = Course.objects.all()
+def vendedores(request):
+    vendedores = Vendedor.objects.all()
 
     context_dict = {
-        'courses': courses
+        'vendedores': vendedores
     }
 
     return render(
         request=request,
         context=context_dict,
-        template_name="app_coder/courses.html"
+        template_name="app_coder/vendedor.html"
     )
 
 
-def students(request):
-    students = Student.objects.all()
+def productos(request):
+    productos = Producto.objects.all()
 
     context_dict = {
-        'students': students
+        'productos': productos
     }
 
     return render(
         request=request,
         context=context_dict,
-        template_name="app_coder/students.html"
-    )
-
-
-def homeworks(request):
-    homeworks = Homework.objects.all()
-
-    context_dict = {
-        'homeworks': homeworks
-    }
-
-    return render(
-        request=request,
-        context=context_dict,
-        template_name="app_coder/homeworks.html"
+        template_name="app_coder/productos.html"
     )
 
 
 def form_hmtl(request):
 
     if request.method == 'POST':
-        course = Course(name=request.POST['name'], code=request.POST['code'])
-        course.save()
+        sucursal = Sucursal(name=request.POST['name'], code=request.POST['code'])
+        sucursal.save()
 
-        courses = Course.objects.all()
+        sucursal = Sucursal.objects.all()
         context_dict = {
-            'courses': courses
+            'sucursal': sucursal
         }
 
         return render(
             request=request,
             context=context_dict,
-            template_name="app_coder/courses.html"
+            template_name="app_coder/sucursal.html"
         )
 
     return render(
@@ -90,181 +76,164 @@ def form_hmtl(request):
     )
 
 
-def course_forms_django(request):
+def sucursal_forms_django(request):
     if request.method == 'POST':
-        course_form = CourseForm(request.POST)
-        if course_form.is_valid():
-            data = course_form.cleaned_data
-            course = Course(name=data['name'], code=data['code'])
-            course.save()
+        sucursal_form = SucursalForm(request.POST)
+        if sucursal_form.is_valid():
+            data = sucursal_form.cleaned_data
+            sucursal = Sucursal(name=data['name'], code=data['code'])
+            sucursal.save()
 
-            courses = Course.objects.all()
+            sucursal = Sucursal.objects.all()
             context_dict = {
-                'courses': courses
+                'sucursal': sucursal
             }
             return render(
                 request=request,
                 context=context_dict,
-                template_name="app_coder/courses.html"
+                template_name="app_coder/sucursal.html"
             )
 
-    course_form = CourseForm(request.POST)
+    sucursal_form = SucursalForm(request.POST)
     context_dict = {
-        'course_form': course_form
+        'sucursal_form': sucursal_form
     }
     return render(
         request=request,
         context=context_dict,
-        template_name='app_coder/course_django_forms.html'
+        template_name='app_coder/sucursal_django_forms.html'
     )
 
 
 @login_required
-def profesor_forms_django(request):
+def vendedor_forms_django(request):
     if request.method == 'POST':
-        profesor_form = ProfesorForm(request.POST)
-        if profesor_form.is_valid():
-            data = profesor_form.cleaned_data
-            profesor = Profesor(
+        vendedor_form = VendedorForm(request.POST)
+        if vendedor_form.is_valid():
+            data = vendedor_form.cleaned_data
+            vendedor = Vendedor(
                 name=data['name'],
                 last_name=data['last_name'],
                 email=data['email'],
-                profession=data['profession'],
+                area=data['area'],
             )
-            profesor.save()
+            vendedor.save()
 
-            profesors = Profesor.objects.all()
+            vendedor = Vendedor.objects.all()
             context_dict = {
-                'profesors': profesors
+                'vendedor': vendedor
             }
             return render(
                 request=request,
                 context=context_dict,
-                template_name="app_coder/profesors.html"
+                template_name="app_coder/vendedor.html"
             )
 
-    profesor_form = ProfesorForm(request.POST)
+    vendedor_form = VendedorForm(request.POST)
     context_dict = {
-        'profesor_form': profesor_form
+        'vendedor_form': vendedor_form
     }
     return render(
         request=request,
         context=context_dict,
-        template_name='app_coder/profesor_django_forms.html'
+        template_name='app_coder/vendedor_django_forms.html'
     )
 
 
 @login_required
-def update_profesor(request, pk: int):
-    profesor = Profesor.objects.get(pk=pk)
+def update_vendedor(request, pk: int):
+    vendedor = Vendedor.objects.get(pk=pk)
 
     if request.method == 'POST':
-        profesor_form = ProfesorForm(request.POST)
-        if profesor_form.is_valid():
-            data = profesor_form.cleaned_data
-            profesor.name = data['name']
-            profesor.last_name = data['last_name']
-            profesor.email = data['email']
-            profesor.profession = data['profession']
-            profesor.save()
+        vendedor_form = VendedorForm(request.POST)
+        if vendedor_form.is_valid():
+            data = vendedor_form.cleaned_data
+            vendedor.name = data['name']
+            vendedor.last_name = data['last_name']
+            vendedor.email = data['email']
+            vendedor.area = data['area']
+            vendedor.save()
 
-            profesors = Profesor.objects.all()
+            vendedor = Vendedor.objects.all()
             context_dict = {
-                'profesors': profesors
+                'vendedor': vendedor
             }
             return render(
                 request=request,
                 context=context_dict,
-                template_name="app_coder/profesors.html"
+                template_name="app_coder/vendedor.html"
             )
 
-    profesor_form = ProfesorForm(model_to_dict(profesor))
+    vendedor_form = VendedorForm(model_to_dict(vendedor))
     context_dict = {
-        'profesor': profesor,
-        'profesor_form': profesor_form,
+        'vendedor': vendedor,
+        'vendedor_form': vendedor_form,
     }
     return render(
         request=request,
         context=context_dict,
-        template_name='app_coder/profesor_form.html'
+        template_name='app_coder/vendedor_form.html'
     )
 
 
 @login_required
-def delete_profesor(request, pk: int):
-    profesor = Profesor.objects.get(pk=pk)
+def delete_vendedor(request, pk: int):
+    vendedor = Vendedor.objects.get(pk=pk)
     if request.method == 'POST':
-        profesor.delete()
+        vendedor.delete()
 
-        profesors = Profesor.objects.all()
+        vendedor = Vendedor.objects.all()
         context_dict = {
-            'profesors': profesors
+            'vendedor': vendedor
         }
         return render(
             request=request,
             context=context_dict,
-            template_name="app_coder/profesors.html"
+            template_name="app_coder/vendedor.html"
         )
 
     context_dict = {
-        'profesor': profesor,
+        'vendedor': vendedor,
     }
     return render(
         request=request,
         context=context_dict,
-        template_name='app_coder/profesor_confirm_delete.html'
+        template_name='app_coder/vendedor_confirm_delete.html'
     )
 
 
-def homework_forms_django(request):
+def productos_forms_django(request):
     if request.method == 'POST':
-        homework_form = HomeworkForm(request.POST)
-        if homework_form.is_valid():
-            data = homework_form.cleaned_data
-            homework = Homework(
+        productos_form = ProductosForm(request.POST)
+        if productos_form.is_valid():
+            data = productos_form.cleaned_data
+            productos = Producto(
                 name=data['name'],
                 due_date=data['due_date'],
                 is_delivered=data['is_delivered'],
             )
-            homework.save()
+            productos.save()
 
-            homeworks = Homework.objects.all()
+            productos = Producto.objects.all()
             context_dict = {
-                'homeworks': homeworks
+                'productos': productos
             }
             return render(
                 request=request,
                 context=context_dict,
-                template_name="app_coder/homeworks.html"
+                template_name="app_coder/productos.html"
             )
 
-    homework_form = HomeworkForm(request.POST)
+    productos_form = ProductosForm(request.POST)
     context_dict = {
-        'homework_form': homework_form
+        'productos_form': productos_form
     }
     return render(
         request=request,
         context=context_dict,
-        template_name='app_coder/homework_django_forms.html'
+        template_name='app_coder/productos_django_forms.html'
     )
 
-
-def search(request):
-    context_dict = dict()
-    if request.GET['all_search']:
-        search_param = request.GET['all_search']
-        query = Q(name__contains=search_param)
-        query.add(Q(code__contains=search_param), Q.OR)
-        courses = Course.objects.filter(query)
-        context_dict = {
-            'courses': courses
-        }
-
-    return render(
-        request=request,
-        context=context_dict,
-        template_name="app_coder/home.html",
-    )
 
 from django.urls import reverse_lazy
 from django.views.generic import ListView
@@ -273,34 +242,34 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-class CourseListView(ListView):
-    model = Course
-    template_name = "app_coder/course_list.html"
+class SucursalListView(ListView):
+    model = sucursal
+    template_name = "app_coder/sucursal_list.html"
 
 
-class CourseDetailView(DetailView):
-    model = Course
+class SucursalDetailView(DetailView):
+    model = sucursal
     template_name = "app_coder/course_detail.html"
 
 
-class CourseCreateView(LoginRequiredMixin, CreateView):
-    model = Course
+class SucursalCreateView(LoginRequiredMixin, CreateView):
+    model = sucursal
+    # template_name = "app_coder/course_form.html"
+    # success_url = "/app_coder/courses"
+    success_url = reverse_lazy('app_coder:sucursal-list')
+    fields = ['name', 'code']
+
+
+class SucursalUpdateView(LoginRequiredMixin, UpdateView):
+    model = sucursal
     # template_name = "app_coder/course_form.html"
     # success_url = "/app_coder/courses"
     success_url = reverse_lazy('app_coder:course-list')
     fields = ['name', 'code']
 
 
-class CourseUpdateView(LoginRequiredMixin, UpdateView):
-    model = Course
-    # template_name = "app_coder/course_form.html"
-    # success_url = "/app_coder/courses"
-    success_url = reverse_lazy('app_coder:course-list')
-    fields = ['name', 'code']
-
-
-class CourseDeleteView(LoginRequiredMixin, DeleteView):
-    model = Course
+class SucursalDeleteView(LoginRequiredMixin, DeleteView):
+    model = sucursal
     # success_url = "/app_coder/courses"
     success_url = reverse_lazy('app_coder:course-list')
 
@@ -363,3 +332,20 @@ def login_request(request):
 def logout_request(request):
       logout(request)
       return redirect("app_coder:Home")
+
+def search(request):
+    context_dict = dict()
+    if request.GET['all_search']:
+        search_param = request.GET['all_search']
+        query = Q(name__contains=search_param)
+        query.add(Q(code__contains=search_param), Q.OR)
+        sucursales = Sucursal.objects.filter(query)
+        context_dict = {
+            'sucursales': sucursales
+        }
+
+    return render(
+        request=request,
+        context=context_dict,
+        template_name="app_coder/home.html",
+    )

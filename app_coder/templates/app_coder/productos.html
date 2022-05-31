@@ -1,0 +1,23 @@
+{% extends "app_coder/index.html" %}
+{% load static %}
+{% block app_coder_content %}
+
+<h2>Lista de Productos</h2>
+<a class="card_custom" href="{% url 'app_coder:producto-add' %}">Crear nuevo producto</a>
+<hr></hr>
+<ul>
+    {% for p in productos %}
+        <li>
+            Entregable: {{p.name}}
+            -- Fecha de elaboración: {{p.due_date}}
+            -- Vendido:
+                {% if p.is_delivered %}
+                    Si
+                {% else %}
+                    No
+                {% endif%}
+        </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

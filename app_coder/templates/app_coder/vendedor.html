@@ -2,20 +2,20 @@
 {% load static %}
 {% block app_coder_content %}
 
-<h2>Lista de Profesores</h2>
-<a class="card_custom" href="{% url 'app_coder:profesor-add' %}">Crear nuevo Profesor</a>
+<h2>Lista de Vendedores</h2>
+<a class="card_custom" href="{% url 'app_coder:vendedor-add' %}">Crear nuevo Vendedor</a>
 <hr>
 </hr>
 <ul>
-    {% for profesor in profesors %}
+    {% for vendedor in vendedores %}
     <li>
-        {{profesor}}
+        {{vendedor}}
         (
-        <a href="{% url 'app_coder:profesor-update' profesor.id %}">
+        <a href="{% url 'app_coder:vendedor-update' vendedor.id %}">
             <i class="fa fa-pencil" style="color: rgb(0, 0, 190);"></i>
         </a>
         |
-        <a href="{% url 'app_coder:profesor-delete' profesor.id %}">
+        <a href="{% url 'app_coder:vendedor-delete' vendedor.id %}">
             <i class="fa fa-trash" style="color: rgb(0, 0, 100);"></i>
         </a>
         )

@@ -2,7 +2,7 @@
 {% load static %}
 {% block app_coder_content %}
 
-<h2>Buscador de cursos</h2>
+<h2>Buscador de sucursal</h2>
 <hr></hr>
 
 <form action="/app_coder/search" method="GET">
@@ -18,12 +18,12 @@
 <!-- {% if user.is_authenticated %} -->
 <!-- {% endif %} -->
 
-{% if courses %}
+{% if sucursales %}
     <ul>
-        {% for course in courses %}
+        {% for sucursal in sucursales %}
             <li>
-                Curso: {{course.name}}
-                -- Camada: {{course.code}}
+                sucursal: {{sucursal.name}}
+                -- Número: {{sucursal.code}}
             </li>
         {% endfor %}
     </ul>

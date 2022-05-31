@@ -28,14 +28,14 @@ pip install Django
 
 - Crear base de datos con los Modelos (hacer migraciones y migrar)
 ```bash
-python manage.py makemigrations app_coder
+python3 manage.py makemigrations app_coder
 
-python manage.py migrate
+python3 manage.py migrate
 ```
 
 - Crear super-usuario
 ```bash
-python manage.py createsuperuser
+python3 manage.py createsuperuser
 ```
 
 - Ejecutar proyecto

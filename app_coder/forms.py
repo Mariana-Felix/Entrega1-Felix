@@ -1,31 +1,25 @@
 from django import forms
 from django.forms import ModelForm
-from app_coder.models import Profesor
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
 
-class CourseForm(forms.Form):
+class SucursalForm(forms.Form):
     name = forms.CharField(max_length=40, min_length=3, label='Nombre')
-    code = forms.IntegerField(label='Camada')
+    code = forms.IntegerField(label='Número')
 
 
-class ProfesorForm(forms.Form):
+class VendedorForm(forms.Form):
     name = forms.CharField(max_length=40, min_length=3, label='Nombre')
     last_name = forms.CharField(max_length=40, label='Apellido')
     email = forms.EmailField(label='Correo electrónico')
-    profession = forms.CharField(max_length=40, label='Profesión')
-
-# class ProfesorForm(ModelForm):
-#     class Meta:
-#         model = Profesor
-#         fields = '__all__'
+    area = forms.CharField(max_length=40, label='Area')
 
 
-class HomeworkForm(forms.Form):
-    name = forms.CharField(max_length=40, min_length=3, label='Nombre de la Entrega')
+class ProductosForm (forms.Form):
+    name = forms.CharField(max_length=40, min_length=3, label='Nombre del producto')
     due_date = forms.DateField(
-        label='Fecha de Entrega',
+        label='Fecha de elaboracion',
         widget=forms.TextInput(attrs={'placeholder': 'yyyy-mm-dd'})
     )
     is_delivered = forms.BooleanField(label='Entregado', required=False)
